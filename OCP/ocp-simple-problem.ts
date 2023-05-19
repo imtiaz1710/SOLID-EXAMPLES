@@ -1,8 +1,6 @@
 namespace SimpleOCPProblem{
     class Employee{
         name: string;
-        address: string;
-        phoneNo: string;
         type:EmployeeType.Intern;
     }
 

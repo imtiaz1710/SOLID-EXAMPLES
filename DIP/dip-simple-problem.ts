@@ -4,10 +4,6 @@ namespace DipSimpleProblem {
         public logToConsole(message: string) {
             //implementation
         }
-
-        public logToEmail(message: string) {
-            //implementation
-        }
     }
 
     class EmployeeService { //higher level module

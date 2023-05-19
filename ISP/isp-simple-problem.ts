@@ -17,7 +17,7 @@ namespace SimpleIspProblem{
         }
     }
 
-    class AnalogPrinter implements IPrinter{
+    class AnaloguePrinter implements IPrinter{
         print(content: string): void {
             //implementation
         }

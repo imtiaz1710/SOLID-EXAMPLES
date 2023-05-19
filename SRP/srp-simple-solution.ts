@@ -17,7 +17,7 @@ namespace SrpSimpleSolution{
     
     class InovoiceGenerator{
         public generateInovoice(product: Product) {
-    
+            
         }
     }
 }
