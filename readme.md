@@ -143,7 +143,7 @@ We can create ```IEmployeeSalaryCalculator```  interface for salary calculation 
 
 
 
-## **Liskov Substitution Principle**
+## **Liskov Substitution Principle (LSP)**
 ---
 >The principle defines that objects of a superclass shall be replaceable/interchangeable with objects of its subclasses without breaking the application. 
 
@@ -284,13 +284,15 @@ interface IPrinter{
 Now we separate the interface for each of the functionality and do not force analogue type printer to implement the functuality that it doesn't have.
 
 
-## **Dependency Inversion Principle**
+## **Dependency Inversion Principle (DIP)**
 ---
 >High-level modules should not depend on low-level modules. Both should depend on abstractions.Abstractions should not depend on details. Details should depend on abstractions.
 
+In the following diagram EmployeeService and UserService depends on Logger. That violates the DIP.
 
 ![alt text](DIP1.PNG)
 
+DIP states that both Logger, UserService and EmployeeService class should depends on ILogger interface. 
 ![alt text](DIP2.PNG)
 
 Let's see below example: 
@@ -369,3 +371,29 @@ interface ILogger {
         }
     }
 ```
+
+### Sources:
+---
+SOLID: 
+- https://medium.com/@alemarr/solid-principles-using-typescript-c475031efcd3
+
+SRP:
+- https://blog.cleancoder.com/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html 
+
+
+OCP:
+- https://medium.com/swift-india/solid-principles-part-2-open-closed-principle-bf0514b824ca 
+- https://blog.cleancoder.com/uncle-bob/2014/05/12/TheOpenClosedPrinciple.html
+
+
+LSP: 
+- https://medium.com/design-patterns-principles/liskov-substitution-principle-648bb2d55187#:~:text=The%20Liskov%20Substitution%20Principle%20(LSP)%20is%20one%20of%20five%20SOLID,subclasses%20without%20breaking%20the%20application
+
+- https://medium.com/@learnstuff.io/liskov-substitution-principle-ad0d6a51ffb0
+
+
+ISP:
+- https://medium.com/swift-india/solid-principles-part-4-interface-segregation-principle-68b671927c88
+
+DIP: 
+- https://medium.com/@kedren.villena/simplifying-dependency-inversion-principle-dip-59228122649a
