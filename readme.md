@@ -7,7 +7,7 @@ OOD (Object Oriented Design Principle) which is popular by Robert C. Martin.
 
 >The Single Responsibility Principle (SRP) states that each software module should have one and only one reason to change.
 
->Gather together the things that change for the same reasons. Separate those things that change for different reasons.*
+>Gather together the things that change for the same reasons. Separate those things that change for different reasons.
 
 ```typescript
 class Product {
@@ -25,7 +25,7 @@ class Product {
     }
 ```
 
-The principle statle that there should be only one responsiblity for each module. In the example of upper Class it violates the SRP for introducing **purchase()** and **generatingInovoice()** in a single class. They should not be togher in a module because purchase and generating Inovoice is two different things and two different reasons for changing. we can create two class for this two methods like the follwoing: 
+The principle statle that there should be only one responsiblity for each module. In the example of upper Class it violates the SRP for introducing **purchase()** and **generatingInovoice()** method in a single class. They should not be together in a module because purchasing and generating Inovoice is two different things and has two different reasons for changing.According to the principle we have to create two differnt class for these two methods like the follwoing: 
 
 ```typescript
 class Product {
@@ -47,7 +47,7 @@ class Product {
     }
 ```
 
-That is example of class level module. If we write code for a task in a method that is not responsible for that, also violates the SRP. Here is an example of a method that violates the SRP: 
+That is the example of class level module. If we write code for a task in a method that is not responsible for that, also violates the SRP. Here is an example of method level violation of SRP: 
 
 ```typscript
 createUser(){
@@ -57,7 +57,7 @@ createUser(){
 ```
 creating user and sending email is two differnt task. There should be another mehtod for the seneding email who is only responsible for sending email. 
 
-If we not maintain SRP in our code,  it can lead to a number of problems
+If we not maintain SRP in our code,  it can lead to a number of problems like: Code complexity, Code duplication, Code coupling, Testing complexity
 
 
 
@@ -99,7 +99,11 @@ Le's see the following example:
         }
     }
 ```
-In the above example we have Employee array which have employee type.Based on that type we calculate the salary of different type of employee. If more employee type added then we have to change code in enum and calculate salary method. If we change in code in the existing class or method in production it can create bug in our working code and we have to test all the module which use this method.Our code should close for modification. We should not modify our existing code unless we get bug in it. Lets see the below code example how we apply OCP in the previous code.
+In the above example we have Employee class which have employee type. Based on that type we calculate the salary of different types of employee. 
+
+If more employee type added then we have to change code in enum and calculate salary method. If we change in code in the existing class or method in production, it can create bug in our working code and we have to test all the modules which use the method. 
+
+Our code should close for modification. We should not modify our existing code unless we get bug in it. Lets see the below code example, how we apply OCP in our previous code:
 
 ```typescript
 class Employee {
@@ -135,7 +139,7 @@ class Employee {
     }
 ```
 
-We can create ```IEmployeeSalaryCalculator```  interface for salary calculation . We can create salary calculator classe for each type of employee and implement the interface to it. No, If we have to add new type of emplyee then we can easily create a class for this and implement the interface to it. No code will be modified. There will be no effect on the existing code for the new type. Our code in now open for extensin and we can extend our code according to our need.
+We can create ```IEmployeeSalaryCalculator```  interface for salary calculation . We can create salary calculator classe for each type of employee and implement the interface to it. Now, If we have to add new type of employee then we can easily create a class for this and implement the interface to it. No code will be modified. There will be no effect on the existing code for the new type. Our code in now open for extension and we can extend our code according to our need.
 
 
 
@@ -171,7 +175,12 @@ class Orange implements Apple{
 apple: Apple = new Orange();
 ```
 
-In the above example we can inherit Orange from apple. Compailer will not give error.But they are not interchangeable. If we assign Orange instance to Apple then from the GetColor method of apple instance, we will not get the correct behavior of Apple. Apple is not Orange Color. It will confused developer.If we have to inherit then we have to ensure that the parent class property that the child class override will behave same as parent class. Let's take a look at the following example:
+In the above example we can inherit Orange from apple. Compailer will not give error.
+But they are not interchangeable. 
+
+If we assign Orange instance to Apple then from the GetColor method of apple object, we will not get the correct behavior of Apple. Apple is not 'Orange' Color. It will confused developer.
+
+If we have to inherit then we have to ensure that the parent class property that the child class override will behave same as parent class. Let's take a look at the following example:
 
 ```typescript
    interface IFruit{
@@ -194,7 +203,8 @@ In the above example we can inherit Orange from apple. Compailer will not give e
 fruit: IFruit = new Orange();
 fruit: IFruit = new Apple();
 ```
-If we implement IFruit To Apple or Orange. The IFruit instance is interchangable to Apple or Orange instance.The expected Fruit color can be red or orange or anything. So behaviour of the class is not changed. 
+If we implement IFruit To Apple or Orange. The IFruit instance is interchangable to Apple or Orange instance.
+The expected Fruit color can be 'red' or 'orange' or anything. So, expected behaviour of the method will not change in the child class. 
 
 
 
@@ -238,7 +248,7 @@ Let's see the following example:
     }
 ```
 
-In the above example we force Analogue priner to implement scan and fax functionality. But they have no functionality like these. And we force every type of printer to implement the functinality that they don't have. We can create separate interface for each of the funcionality. The solution of the problem are given below:
+In the above example we force Analogue priner to implement scan() and fax() functionality. But they have no functionality like these. And we force every type of printer to implement the functinality that they don't have. We can create separate interface for each of the funcionality. The solution of the problem are given below:
 
 ```typescript
 interface IPrinter{
@@ -309,7 +319,8 @@ class Logger {
     }
 ```
 
-Here High level module is the EmployeeService and UserService. They depend on Logger class which is low level module.If we want to change our logger then we have to modify every class or module which use it and also test it.It violates the OCP.And make code tightly coupled. We can create ILogger and Logger, EmployeeService and UserService will depend on it. Then our system will be loosely coupled.
+Here, High level module is the EmployeeService and UserService class. They depend on Logger class which is low level module. If we want to change our logger then we have to modify every class or module which use it and also test it.
+It violates the OCP. And make code tightly coupled.According to the principle, we can create ILogger interface.Logger, EmployeeService and UserService class will depend on it. Then our system will be loosely coupled.
 
 >Loose coupling, where you have minimal interdependence between components or modules of a system, is a sign of a well-structured application.
 
