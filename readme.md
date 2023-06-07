@@ -25,10 +25,10 @@ class Product {
     }
 ```
 
-The principle statle that there should be only one responsiblity for each module. In the example of upper Class it violates the SRP for introducing **purchase()** and **generatingInovoice()** method in a single class. They should not be together in a module because purchasing and generating Inovoice is two different things and has two different reasons for changing.According to the principle we have to create two differnt class for these two methods like the follwoing: 
+The principle states that there should be only one responsibility for each module. In the example of upper class it violates the SRP for introducing **purchase()** and **generatingInovoice()** method in a single class. They should not be together in a module because purchasing and generating Inovoice is two different things and has two different reasons for changing. According to the principle we have to create two differnt class for these two methods like the follwoing: 
 
 ```typescript
-class Product {
+    class Product {
         public name: string;
         public description: string;
         public price: number;
@@ -47,7 +47,7 @@ class Product {
     }
 ```
 
-That is the example of class level module. If we write code for a task in a method that is not responsible for that, also violates the SRP. Here is an example of method level violation of SRP: 
+That is the example of class level module. If we write code for a task in a method that is not responsible for that, also violates the SRP. Here is an example of a method that violates the SRP: 
 
 ```typscript
 createUser(){
@@ -55,11 +55,9 @@ createUser(){
     //code for sending email to the user
 }
 ```
-creating user and sending email is two differnt task. There should be another mehtod for the seneding email who is only responsible for sending email. 
+creating user and sending email are two different tasks. There should be another mehtod for the seneding email who is only responsible for sending email. 
 
-If we not maintain SRP in our code,  it can lead to a number of problems like: Code complexity, Code duplication, Code coupling, Testing complexity
-
-
+If we not maintain SRP in our code,  it can lead to a number of problems like: Code complexity, Code duplication, Code coupling, Testing complexity etc.
 
 ## **Open Close Principle (OCP)**
 ---
@@ -99,11 +97,7 @@ Le's see the following example:
         }
     }
 ```
-In the above example we have Employee class which have employee type. Based on that type we calculate the salary of different types of employee. 
-
-If more employee type added then we have to change code in enum and calculate salary method. If we change in code in the existing class or method in production, it can create bug in our working code and we have to test all the modules which use the method. 
-
-Our code should close for modification. We should not modify our existing code unless we get bug in it. Lets see the below code example, how we apply OCP in our previous code:
+In the above example, we have ``Employee`` class which has a property named ``type``. Based on that type in the ``EmployeeSalaryCalculator`` class we calculate the salary of different types of employee. If more employee type added then we have to change the code in ``EmployeeType`` enum and calculate salary method. If we change the existing class or method in production, it can create bugs in our working code and we have to test all the module which use it. Our code should close for modification. We should not modify our existing code, unless we get bug in it. Let's see the below code example how we apply OCP in the previous code.
 
 ```typescript
 class Employee {
@@ -139,7 +133,7 @@ class Employee {
     }
 ```
 
-We can create ```IEmployeeSalaryCalculator```  interface for salary calculation . We can create salary calculator classe for each type of employee and implement the interface to it. Now, If we have to add new type of employee then we can easily create a class for this and implement the interface to it. No code will be modified. There will be no effect on the existing code for the new type. Our code in now open for extension and we can extend our code according to our need.
+We can create ```IEmployeeSalaryCalculator```  interface for salary calculation. We can create salary calculator class for each type of employee and implement the interface to it. Now, If we have to add new type of employee then we can easily create a class for this and implement the interface to it. No code will be modified. There will be no effect on the existing code for the new type. Our code is now open for extension and we can extend our code according to our need.
 
 
 
@@ -175,12 +169,7 @@ class Orange implements Apple{
 apple: Apple = new Orange();
 ```
 
-In the above example we can inherit Orange from apple. Compailer will not give error.
-But they are not interchangeable. 
-
-If we assign Orange instance to Apple then from the GetColor method of apple object, we will not get the correct behavior of Apple. Apple is not 'Orange' Color. It will confused developer.
-
-If we have to inherit then we have to ensure that the parent class property that the child class override will behave same as parent class. Let's take a look at the following example:
+In the above example we can inherit ``Orange`` from ``apple``. Compailer will not give any error. But they are not interchangeable. If we assign ``Orange`` type instance to ``Apple`` type instance, then, from the ``GetColor()`` method of ``Apple`` type instance, we will not get the correct behavior of ``Apple``. Apple is not Orange Color. It will confused developer. If we have to inherit then we have to ensure that the parent class property that the child class override will behave same as parent class. Let's take a look at the following example:
 
 ```typescript
    interface IFruit{
@@ -203,14 +192,13 @@ If we have to inherit then we have to ensure that the parent class property that
 fruit: IFruit = new Orange();
 fruit: IFruit = new Apple();
 ```
-If we implement IFruit To Apple or Orange. The IFruit instance is interchangable to Apple or Orange instance.
-The expected Fruit color can be 'red' or 'orange' or anything. So, expected behaviour of the method will not change in the child class. 
+If we implement ``IFruit`` to ``Apple`` or ``Orange``. The ``IFruit`` instance is interchangable to ``Apple`` or ``Orange`` instance. The expected Fruit color can be red or orange or anything. So behaviour of the class is not changed. 
 
 
 
 ## **Interface Segregation Principle (ISP)**
 ---
->It is the SRP for Interface
+>It is the SRP for Interface.
 
 >Clients should not be forced to implement any methods they don’t use. Rather than one fat interface, numerous little interfaces are preferred based on groups of methods with each interface serving one submodule.
 
@@ -248,7 +236,7 @@ Let's see the following example:
     }
 ```
 
-In the above example we force Analogue priner to implement scan() and fax() functionality. But they have no functionality like these. And we force every type of printer to implement the functinality that they don't have. We can create separate interface for each of the funcionality. The solution of the problem are given below:
+In the above example, we force ``AnaloguePriner`` to implement ``scan() ``and ``fax()`` functionality. But they have no functionality like these. And we force every type of printer to implement the functinality that they don't have. We can create separate interface for each of the funcionality. The solution of the problem are given below:
 
 ```typescript
 interface IPrinter{
@@ -281,7 +269,7 @@ interface IPrinter{
         }
     }
 ```
-Now we separate the interface for each of the functionality and do not force analogue type printer to implement the functuality that it doesn't have.
+Now, we separate the interface for each of the functionality and do not force analogue type printer to implement the functuality that it doesn't have.
 
 
 ## **Dependency Inversion Principle (DIP)**
