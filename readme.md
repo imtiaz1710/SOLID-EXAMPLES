@@ -151,49 +151,39 @@ Barbara Liskov, defining it in 1988, provided a more mathematical definition:
 >If for each object o1 of type S there is an object o2 of type T such that for all programs P defined in terms of T, the behavior of P is unchanged when o1 is substituted for o2 then S is a subtype of T.
 
 ```typescript
-class Apple {
-    public GetColor() {
-        return "Red";
+public class Animal {
+    public void makeNoise() {
+        System.out.println("I am making noise");
     }
 }
 
-class Orange implements Apple{
-    public GetColor() {
-        return "Orange";
+ class DumbDog extends Animal {
+    @Override
+    public void makeNoise() {
+        throw new RuntimeException("I can't make noise");
+    }
+ }
+```
+
+
+In the above code example, we can inherit ``DumbDog`` from ``Animal``. Compailer will not give any error. But they are not interchangeable. ``DumDog`` can not make any noise. It will confuse developer. If we want to inherit, we have to ensure that the parent class property that the child class override will behave same as parent class. Let's take a look at the following example:
+
+```typescript
+public class Dog extends Animal {
+    @Override
+    public void makeNoise() {
+        System.out.println("bow wow");
+    }
+}
+
+public class Cat extends Animal {
+    @Override
+    public void makeNoise() {
+        System.out.println("meow meow");
     }
 }
 ```
-
-
-```typescript
-apple: Apple = new Orange();
-```
-
-In the above example we can inherit ``Orange`` from ``apple``. Compailer will not give any error. But they are not interchangeable. If we assign ``Orange`` type instance to ``Apple`` type instance, then, from the ``GetColor()`` method of ``Apple`` type instance, we will not get the correct behavior of ``Apple``. Apple is not Orange Color. It will confused developer. If we have to inherit then we have to ensure that the parent class property that the child class override will behave same as parent class. Let's take a look at the following example:
-
-```typescript
-   interface IFruit{
-         GetColor(): string;
-    }
-
-    class Apple implements IFruit{
-        public GetColor() {
-            return "Red";
-        }
-    }
-
-    class Orange implements IFruit{
-        public GetColor() {
-            return "Orange";
-        }
-    }
-```
-``` typescript
-fruit: IFruit = new Orange();
-fruit: IFruit = new Apple();
-```
-If we implement ``IFruit`` to ``Apple`` or ``Orange``. The ``IFruit`` instance is interchangable to ``Apple`` or ``Orange`` instance. The expected Fruit color can be red or orange or anything. So behaviour of the class is not changed. 
-
+If we inherit ``Dog`` or ``Cat`` from ``Animal``. The ``Animal`` instance is interchangable to ``Dog`` or ``Cat`` instance. Dog and cat can make noise. 
 
 
 ## **Interface Segregation Principle (ISP)**
@@ -357,6 +347,16 @@ Here is the solution:
             //creating user
             this._logger.log("User creation completed");
         }
+    }
+
+    function main() {
+        const logger: ILogger = new ConsoleLogger();
+
+        const employeeService: EmployeeService = new EmployeeService(logger);
+        employeeService.createEmployee();
+
+        const userService: UserService = new UserService(logger);
+        userService.createUser();
     }
 ```
 
