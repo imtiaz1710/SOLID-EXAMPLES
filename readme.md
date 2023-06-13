@@ -10,7 +10,7 @@ OOD (Object Oriented Design Principle) which is popular by Robert C. Martin.
 >Gather together the things that change for the same reasons. Separate those things that change for different reasons.
 
 ```typescript
-class Product {
+    class Product {
         public name: string;
         public description: string;
         public price: number;
@@ -100,7 +100,7 @@ Le's see the following example:
 In the above example, we have ``Employee`` class which has a property named ``type``. Based on that type in the ``EmployeeSalaryCalculator`` class we calculate the salary of different types of employee. If more employee type added then we have to change the code in ``EmployeeType`` enum and calculate salary method. If we change the existing class or method in production, it can create bugs in our working code and we have to test all the module which use it. Our code should close for modification. We should not modify our existing code, unless we get bug in it. Let's see the below code example how we apply OCP in the previous code.
 
 ```typescript
-class Employee {
+    class Employee {
         name: string;
         salaryCalculator: IEmployeeSalaryCalculator;
 
@@ -239,7 +239,7 @@ Let's see the following example:
 In the above example, we force ``AnaloguePriner`` to implement ``scan() ``and ``fax()`` functionality. But they have no functionality like these. And we force every type of printer to implement the functinality that they don't have. We can create separate interface for each of the funcionality. The solution of the problem are given below:
 
 ```typescript
-interface IPrinter{
+    interface IPrinter{
         print(content: string): void;
     }
 
@@ -276,17 +276,17 @@ Now, we separate the interface for each of the functionality and do not force an
 ---
 >High-level modules should not depend on low-level modules. Both should depend on abstractions.Abstractions should not depend on details. Details should depend on abstractions.
 
-In the following diagram EmployeeService and UserService depends on Logger. That violates the DIP.
+In the following diagram ``EmployeeService`` and ``UserService`` depends on ``Logger``. That violates the DIP.
 
 ![alt text](DIP1.PNG)
 
-DIP states that both Logger, UserService and EmployeeService class should depends on ILogger interface. 
+DIP states that both Logger, ``UserService`` and ``EmployeeService`` class should depends on ``ILogger`` interface. 
 ![alt text](DIP2.PNG)
 
 Let's see below example: 
 
 ```typescript
-class Logger {
+    class Logger {
         public logToConsole(message: string) {
             //implementation
         }
@@ -309,15 +309,15 @@ class Logger {
     }
 ```
 
-Here, High level module is the EmployeeService and UserService class. They depend on Logger class which is low level module. If we want to change our logger then we have to modify every class or module which use it and also test it.
-It violates the OCP. And make code tightly coupled.According to the principle, we can create ILogger interface.Logger, EmployeeService and UserService class will depend on it. Then our system will be loosely coupled.
+Here, High level module is the ``EmployeeService`` and ``UserService`` class. They depend on Logger class which is low level module. If we want to change our logger then we have to modify every class or module which use it and also test it.
+It violates the OCP. And make code tightly coupled.According to the principle, we can create ``ILogger`` interface.``Logger``, ``EmployeeService`` and ``UserService`` class will depend on it. Then our system will be loosely coupled.
 
 >Loose coupling, where you have minimal interdependence between components or modules of a system, is a sign of a well-structured application.
 
 Here is the solution:
 
 ```typescript
-interface ILogger {
+    interface ILogger {
         log(message: string): void;
     }
 
